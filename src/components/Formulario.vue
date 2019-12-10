@@ -2,15 +2,15 @@
   <main>
     <div class="formu-container">
       <div class="mb-1">
-        <div style="text-align: right"><label :for="`name-${_uid}`">Nome:</label></div>
-        <input v-model="formData.name" type="text" :id="`name-${_uid}`">
+        <div style="text-align: right"><label :for="`nome-${_uid}`">Nome:</label></div>
+        <input v-model="formu.name" type="text" :id="`nome-${_uid}`">
       </div>
       <div class="mb-1">
         <div style="text-align: right"><label :for="`email-${_uid}`">E-mail</label></div>
-        <input v-model="formData.email" type="text" :id="`email-${_uid}`">
+        <input v-model="formu.email" type="text" :id="`email-${_uid}`">
       </div>
-      <div class="form-action">
-        <custom-btn small @click.native="$emit('onSaveForm', formData)">Salvar</custom-btn>
+      <div class="formu-action">
+        <custom-btn big @click.native="$emit('onSaveForm', formu)">Salvar</custom-btn>
       </div>
     </div>
   </main>
@@ -20,7 +20,7 @@
 import Botao from "@/components/Botao"
 
 export default {
-  nome: 'CustomFormu',
+  nome: 'EditaFormu',
   components: {
     Botao
   },
@@ -34,7 +34,7 @@ export default {
     }
   }),
   watch: {
-    person: function() {
+    pessoa: function() {
       this.formu.name = this.pessoa.name
       this.formu.email = this.pessoa.email
     }
@@ -46,14 +46,14 @@ export default {
 .formu-container {
   margin-top: 1.5rem;
   text-align: left;
-  color: $secondary-color;
+  color: $primary-color;
   
   input {
     border-radius: 2rem;
     outline: none;
-    border: 1px solid $secondary-color;
+    border: 1px solid $primary-color;
     padding: 4px;
-    color: $secondary-color;
+    color: $primary-color;
     
   }
   .formu-action {
@@ -62,14 +62,14 @@ export default {
     text-align: center;
   }
 }
-@media (max-width: 450px) {
+@media (max-width: 270px) {
   .formu-container {
     display: flex;
-    justify-content: center;
-    align-items: center;
+    justify-content: right ;
+    align-items: left ;
     flex-direction: column;
     input {
-      max-width: 80px;
+      max-width: 40px;
     }
   }
 }

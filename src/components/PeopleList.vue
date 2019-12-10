@@ -1,12 +1,12 @@
 <template>
   <main>
-    <ul class="lista-pessoa">
-      <li v-for="(pessoa, index) in people" :key="index" @click="viewProfile(person.id)">
-        <div :class="[index % 2 == 0 ? 'par' : 'impar', 'lista-pessa-item']">
-          <div>{{pessoa.name}}</div>
-          <div class="pessoa-email">{{pessoa.email}}</div>
+    <ul class="people-list">
+      <li v-for="(person, index) in people" :key="index" @click="viewProfile(person.id)">
+        <div :class="[index % 2 == 0 ? 'even' : 'odd', 'people-list-item']">
+          <div>{{person.name}}</div>
+          <div class="person-email">{{person.email}}</div>
           <div class="actions" @click.stop>
-            <router-link :to="`edit/${pessoa.id}`" class="icon-container">
+            <router-link :to="`edit/${person.id}`" class="icon-container">
               <v-icon name="edit" scale="1" />
             </router-link>
             <div class="icon-container" @click="deletePerson(person.id)">
@@ -21,20 +21,20 @@
 
 <script>
 export default {
-  props: ['pessoa'],
+  props: ['people'],
   data:(() => {
     return {
       
     }
   }),
   methods: {
-    vProfile(id) {
+    viewProfile(id) {
       this.$emit("onViewProfile", id)
     },
-    delPerson(id) {
+    deletePerson(id) {
       this.$emit('onDeletePerson', id)
     },
-    edPerson(id) {
+    editPerson(id) {
       this.$emit('onEditPerson', id)
     }
   }
@@ -42,22 +42,23 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.par {
-  background-color:darkgray;
+.even {
+  background-color: #f2f2f2;
 }
-.impar {
-  background-color: darkgray;
+.odd {
+  background-color: #fffafb;
 }
-.lista-pessoa {
+.people-list {
 .people-list-item {
   padding: .25rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
+
   &:hover {
     cursor: pointer;
   }
-  .pessoa-email {
+  .person-email {
     margin-left: auto;
     max-width: 180px;
     word-break: break-all;
@@ -66,10 +67,12 @@ export default {
     color: #9a9a9a;
   }
 }
+
 }
-  @media (max-width: 400px) {
-    .lista-pessoa {
-      .lista-pessoa-item {
+  @media (max-width: 768px) {
+    .people-list {
+
+      .people-list-item {
         padding: .25rem;
         display: flex;
         flex-direction: column;
@@ -78,7 +81,7 @@ export default {
         &:hover {
           cursor: pointer;
         }
-        .pessoa-email {
+        .person-email {
           margin: 0;
           word-break: break-all;
           text-transform: lowercase;

@@ -1,56 +1,97 @@
 <template>
-  <main>
-    <transition name="modal-transition">
-      <section class="modal" v-if="show" @click="$emit('close')">
-        <div class="modal-content" @click.stop>
-          <slot name="body">
-          </slot>
-          <slot name="actions">
-          </slot>
+    <section class="backdrop">
+        <div class="corpoMod">
+            <div class="modalText">
+                <p>Excluir esse perfil?</p>
+            </div>
+            <div class="Bto">
+                <button>Sim!!</button>
+                <button @click="FechaModal"> Não!!</button>
+            </div>
         </div>
-      </section>
-    </transition>
-  </main>
+    </section>
 </template>
 
 <script>
+import Bus from '../eventBus.js';
+
 export default {
-props: ['show']
+    props:{
+        
+    },
+    data() {
+        return {
+          estado: false,
+        }
+    },
+    methods: {
+        Fecha() {
+            this.estado = !estado;
+            Bus.$emit('abertoOufechado', this.estado);
+        },
+        deleteProfile() {
+
+        }
+    },
 }
 </script>
 
-<style lang="scss" scoped>
-.modal-transition-enter-active, .modal-transition-leave-active {
-  transition: opacity .1s;
-}
-.modal-transition-enter, .modal-transition-leave-to /* .fade-leave-active below version 2.1.8 */ {
-  opacity: 0;
-}
-.modal {
-  position: fixed;
-  z-index: 1000;
-  left: 0;
-  top: 0;
-  width: 100%; 
-  height: 100%; 
-  overflow: auto;  
-  background-color: rgb(0,0,0); 
-  background-color: rgba(0,0,0,0.4); 
-  transition: opacity .3s ease;
-  .modal-content {
-    position: relative;
-    top: 50%;
-    color: $primary-color;
-    font-weight: bold;
-    border-radius: 1.5rem;
-    background-color:darkgrey;
-    margin: auto;
-    padding: 20px;
-    width: 10%;
-    padding: .75rem;
-    @media (max-width: 850px) {
-      width: 60%;
+<style scope lang="scss">
+    .backdrop {
+        box-sizing: border-box;
+        position: fixed;
+        width: 100vw;
+        height: 100vh;
+        top:0;
+        left:0;
+        background-color: #0006;
+
+        .corpoMod{
+            background-color: #fff;
+            box-sizing: border-box;
+            border-radius: 25px;
+            width: 320px;
+            height: 130px;
+            transform: translate(-50%,-50%);
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            padding: 20px;
+            box-shadow: 0 0 5px #333;
+            
+            .modalText {
+                text-align: center;
+                color: #db3c51;
+                font-weight: 500;
+                font-size: 18px;
+
+                p {
+                    margin:0 auto 15px; 
+                }
+            }
+            
+            .Bto{
+                display: flex;
+                justify-content: center;
+
+                button {
+                    border-radius: 15px;
+                    border: 1px solid blue;
+                    background-color: #fff;
+                    color: #db3c51;
+                    margin: 0 10px;
+                    font-size: 15px;
+                    transition: .5s ease;
+                    outline: none;
+                    padding: 2px 10px;
+
+                    &:hover {
+                        background-color: green($color: #000000);
+                        color: #fff;
+                    }
+                }
+            } 
+        }
+
     }
-  }
-}
 </style>

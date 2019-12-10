@@ -1,6 +1,6 @@
 <template>
   <main class="add-bto-main">
-    <button :class="[inverted ? 'inverted-bto': 'default-bto', small ? 'bto-small-container' :'bto-default-container']">
+    <button :class="[inverter ? 'inverter-bto': 'padrao-bto', menor ? 'bto-menor-container' :'bto-padrao-container']">
       <slot/>
     </button>
   </main>
@@ -10,19 +10,19 @@
 export default {
 name: 'AddProfileBto',
 props: {
-  inverted: {
-    type: Boolean,
-    default: false
+  inverter: {
+    tipo: Boolean,
+    padrao: false
   },
-  small: {
-    type: Boolean,
-    default: false
+  menor: {
+    tipe: Boolean,
+    padrao: false
   },
 }
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss" scoped> //scss biblioteca estilo css para VUE
   button {
     outline: none;
     border: none;
@@ -31,8 +31,8 @@ props: {
     background-color: $primary-color;
     color:red;
     &:hover {
-      cursor: pointer;
-      background-color: $primary-hover-color;
+      cursor:pointer;
+      background-color: $background;
     }
   }
   .inverted-bto {
